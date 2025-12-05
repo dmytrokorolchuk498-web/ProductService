@@ -1,18 +1,24 @@
 FROM python:3.13.10-slim-bookworm
 
-# ENV PYTHONDONTWRITEBYTECODE=1
-
-ENV PYTHONUNBUFFERED=1
-
+RUN mkdir /app
 WORKDIR /app
 
-COPY requirements.txt .
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+RUN pip install --upgrade pip
+
+COPY requirements.txt /app/
 
 RUN apt-get update && \
     apt-get install -y gcc libpq-dev && \
-    apt-get clean
+    apt-get clean   
 
-RUN pip3 install -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . /app/
+
+EXPOSE 8000
 
 COPY . .
 
