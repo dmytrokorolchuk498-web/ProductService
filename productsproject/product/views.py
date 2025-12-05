@@ -1,9 +1,7 @@
 from .models import Product
 from .serializers import ProductSerializer
-
 from rest_framework.viewsets import ModelViewSet
 from django_filters.rest_framework import DjangoFilterBackend
-from django.db.models import Max, Min
 
 
 class ProductViewSet(ModelViewSet):
